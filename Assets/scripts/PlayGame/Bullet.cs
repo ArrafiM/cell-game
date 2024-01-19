@@ -13,7 +13,7 @@ public class Bullet : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-      
+
         // GameObject playerObject = GameObject.Find("Player");
         // player = playerObject.transform;
         // Vector2 playerPos = Camera.main.ScreenToWorldPoint(player.position);
@@ -23,7 +23,8 @@ public class Bullet : MonoBehaviour
         Vector2 touchPos = Camera.main.ScreenToWorldPoint(touch.position);
 
         rb = GetComponent<Rigidbody2D>();
-        if(Input.touchCount > 0) {
+        if (Input.touchCount > 0)
+        {
 
             deltaX = touchPos.x - transform.position.x;
             deltaY = touchPos.y - transform.position.y;
@@ -37,13 +38,13 @@ public class Bullet : MonoBehaviour
             rb.velocity = new Vector2(deltaX, deltaY).normalized * force;
             // float rot = Mathf.Atan2(rotX , rotY ) * Mathf.Rad2Deg;
             // transform.rotation = Quaternion.Euler(0, 0, rot * 90);
-        
+
         }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.TryGetComponent<enemyDamage>(out enemyDamage enemyComponent))
+        if (collision.gameObject.TryGetComponent<enemyDamage>(out enemyDamage enemyComponent))
         {
             enemyComponent.TakeDamage(1);
         }
@@ -51,9 +52,10 @@ public class Bullet : MonoBehaviour
         Destroy(this.gameObject);
     }
 
-    private void OnBecameInvisible(){
+    private void OnBecameInvisible()
+    {
         Destroy(gameObject);
     }
 
-    
+
 }
